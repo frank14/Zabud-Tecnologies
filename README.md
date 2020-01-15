@@ -32,7 +32,6 @@ Se deben agregar las siguientes lineas de codigo dentro de nuestro archivo pom.x
     <artifactId>springfox-swagger-ui</artifactId>
     <version>2.9.2</version>
 </dependency>
-
 ```
 
 ## Conectarse a una base de datos en Postgres
@@ -53,3 +52,23 @@ spring.jpa.hibernate.ddl-auto=update
 
 1. Clic derecho sobre el proyecto > run as > clic en spring boot app.
 2. Dirigirse a la ruta http://localhost:8080/swagger-ui.html.
+
+## Estructura de los proyectos
+
+```
+com.app.api
+com.app.api.application
+com.app.api.controller
+com.app.api.domain.model
+com.app.api.domain.service
+com.app.api.exceptions
+com.app.api.infrastructure.dto
+com.app.api.infrastructure.mapper
+com.app.api.infrastructure.repository.adapter
+com.app.api.infrastructure.repository.database
+com.app.api.infrastructure.rest
+com.app.api.shared.domain
+com.app.api.shared.infrastructure.mapper
+```
+
+![Imagen 3](./screenshot/Screenshot_2.png)
