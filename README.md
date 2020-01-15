@@ -33,6 +33,11 @@ Se deben agregar las siguientes lineas de codigo dentro de nuestro archivo pom.x
     <version>2.9.2</version>
 </dependency>
 ```
+## Lombok
+
+Descargar el paquete Lombok en el siguiente enlace https://projectlombok.org/download
+
+- Se deben inicializar las clases @Data para 
 
 ## Conectarse a una base de datos en Postgres
 
