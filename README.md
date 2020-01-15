@@ -13,3 +13,4 @@ Para Crear un proyecto basta con ingresar al siguiente enlace https://start.spri
 Y seleccionar los campos deseados tal y como se muestra en las siguientes imagenes:
 
 ![Imagen 1](./screenshot/Screenshot_1.png)
+![Imagen 2](./screenshot/Screenshot_6.png)
