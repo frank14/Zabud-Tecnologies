@@ -37,7 +37,119 @@ Se deben agregar las siguientes lineas de codigo dentro de nuestro archivo pom.x
 
 Descargar el paquete Lombok en el siguiente enlace https://projectlombok.org/download
 
-- Se deben inicializar las clases @Data para 
+## Agregando Enlaces
+
+- En la clase com.app.api
+
+```
+@SpringBootApplication
+@EnableSwagger2
+@EnableJpaAuditing
+```
+
+- En la clase com.app.api.application
+
+```
+
+```
+
+- En la clase com.app.api.controller
+
+```
+@RestController
+@RequestMapping("/subject")
+```
+
+- En la clase com.app.api.domain.model
+
+```
+@Getter
+@AllArgsConstructor
+```
+
+- En la clase com.app.api.domain.service
+
+```
+
+```
+
+- En la clase com.app.api.exceptions
+
+    1. ErrorCode.java
+
+        ```
+        @Data
+        @NoArgsConstructor
+        @AllArgsConstructor
+        ```
+
+    2. 
+
+        ```
+        @ExceptionHandler(Exception.class)
+        @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+        ```
+
+- En la clase com.app.api.infrastructure.dto
+
+1. Base Entity
+
+    ```
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @MappedSuperclass
+    @EntityListeners(AuditingEntityListener.class)
+    ```
+
+2. SubjectDto
+
+    ```
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Entity
+    @Table(name = "subjects")
+    ```
+
+- En la clase com.app.api.infrastructure.mapper
+
+```
+@Component
+```
+
+- En la clase com.app.api.infrastructure.repository.adapter
+
+```
+
+```
+
+- En la clase com.app.api.infrastructure.repository.database
+
+```
+@Repository
+```
+
+- En la clase com.app.api.infrastructure.rest
+
+```
+@Data
+```
+
+- En la clase com.app.api.shared.domain
+
+```
+@Getter
+try catch
+```
+
+- En la clase com.app.api.shared.infrastructure.mapper
+
+```
+<I O>
+<O I>
+```
 
 ## Conectarse a una base de datos en Postgres
 
