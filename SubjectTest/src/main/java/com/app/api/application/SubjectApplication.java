@@ -29,8 +29,8 @@ public class SubjectApplication {
 		subjectService.deleteSubject(new Id(id));
 	}
 
-	public SubjectRest update(SubjectRest subject) {
-		return subjectMapper.domRest(subjectService.updateSubject(subjectMapper.restDom(subject)));
+	public SubjectRest update(SubjectRest subject, String id) {
+		return subjectMapper.domRest(subjectService.updateSubject(subjectMapper.restDom(subject), new Id(id)));
 	}
 
 	public List<SubjectRest> getAll() {
@@ -39,10 +39,6 @@ public class SubjectApplication {
 
 	public SubjectRest findSubject(String id) {
 		return subjectMapper.domRest(subjectService.getSubject(new Id(id)));
-	}
-	// TODO: Investigar si es parte de la solucion
-	public SubjectDto updateSubject(SubjectDto subjectDto, String id) {
-		return subjectMapper.domDto(subjectService.updateSubject(subjectMapper.dtoDom(subjectDto)));
 	}
 
 }

@@ -36,13 +36,13 @@ public class SubjectAdapter implements SubjectService {
 	}
 
 	@Override
-	public Subject updateSubject(Subject subject) {
-		return subjectMapper.dtoDom(subjectMapper.domDto(subject));
+	public void deleteSubject(Id id) {
+		subjectRepository.deleteById(id.getId());
 	}
 
 	@Override
-	public void deleteSubject(Id id) {
-		subjectRepository.deleteById(id.getId());
+	public Subject updateSubject(Subject subject, Id id) {
+		return subjectMapper.dtoDom(subjectMapper.domDto(subject));
 	}
 
 }

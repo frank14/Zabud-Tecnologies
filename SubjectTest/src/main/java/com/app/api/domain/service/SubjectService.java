@@ -13,7 +13,7 @@ public interface SubjectService {
 
 	public List<Subject> getSubjects();
 
-	public Subject updateSubject(Subject subject);
+	public Subject updateSubject(Subject subject, Id id);
 
 	public void deleteSubject(Id id);
 
