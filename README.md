@@ -189,3 +189,5 @@ com.app.api.shared.infrastructure.mapper
 ```
 
 ![Imagen 3](./screenshot/Screenshot_2.png)
+
+## Glosario
