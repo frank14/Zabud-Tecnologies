@@ -17,14 +17,12 @@ public class ProductAdapter {
 	@Autowired
 	ProductMapper productMapper;
 	
-	@Override
 	public Product saveProduct(Product product) {
 		return productMapper.dtoDom(productRepository.save(productMapper.domDto(product)));
 	}
 	
-	@Override
 	public Product getProduct(Id id) {
-		return productMapper.dtoDom(productRepositori);
+		return productMapper.dtoDom(productRepository.findById(id.getId()).orElseThrow(() -> new RuntimeException()));
 	}
 	
 }
