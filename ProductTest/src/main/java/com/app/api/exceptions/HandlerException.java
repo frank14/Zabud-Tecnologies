@@ -72,7 +72,31 @@ public class HandlerException {
 		return ec;
 		
 	}
-
+	
+	@ExceptionHandler(CountException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ErrorCode countException(CountException e) {
+		
+		ErrorCode ec = new ErrorCode();
+		ec.setCode(generateId());
+		ec.setMessage(e.getMessage());
+		generateLog(e, ec);
+		return ec;
+		
+	}
+	
+	@ExceptionHandler(TotalPriceException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ErrorCode totalPriceException(TotalPriceException e) {
+		
+		ErrorCode ec = new ErrorCode();
+		ec.setCode(generateId());
+		ec.setMessage(e.getMessage());
+		generateLog(e, ec);
+		return ec;
+		
+	}
+	
 	public String generateId() {
 		return UUID.randomUUID().toString();
 	}
