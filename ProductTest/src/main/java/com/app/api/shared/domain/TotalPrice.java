@@ -4,15 +4,15 @@ import com.app.api.exceptions.PriceException;
 
 import lombok.Getter;
 
-public class Price {
-
+public class TotalPrice {
+	
 	@Getter
-	private final Double price;
+	private final Double totalPrice;
 
-	public Price(Double value) {
+	public TotalPrice(Double value) {
 		
 		try {
-			this.price = value;
+			this.totalPrice = value;
 			
 			if (value <= 0) {
 				throw new PriceException();

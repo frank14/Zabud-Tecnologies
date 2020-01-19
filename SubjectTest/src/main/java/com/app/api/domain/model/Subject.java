@@ -9,16 +9,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
+@AllArgsConstructor(staticName = "of")
 public class Subject {
 	
 	private final Id id;
 	private final Code code;
 	private final Name name;
 	private final Credit credit;
-
-	public static Subject of(Id id, Code code, Name name, Credit credit) {
-		return new Subject(id, code, name, credit);
-	}
 	
 }

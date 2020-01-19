@@ -9,16 +9,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
+@AllArgsConstructor(staticName = "of")
 public class Product {
 	
 	private final Id id;
 	private final Code code;
 	private final Name name;
 	private final Price price;
-
-	public static Product of(Id id, Code code, Name name, Price price) {
-		return new Product(id, code, name, price);
-	}
 	
 }
