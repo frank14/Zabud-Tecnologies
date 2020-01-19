@@ -1,11 +1,21 @@
-# Spring
-Anotaciones y desarrollos con spring.
+# Arquitectura DDD
+
+La arquitectura Diseño guiado por el dominio **(Domain Driven Design)** es un conjunto de patrones principos y práticas que nos ayudan a resolver y entender los problemas del negocio **(Dominio)** en el diseño de sistemas orientados a objetos.  
+
+# Spring Framework
+
+Spring, ofrece como elemento clave el soporte de infraestructura a nivel de aplicación, brindando un completo modelo tanto para la configuración como para la programación de aplicaciones empresariales desarrolladas bajo Java, sin discriminación en cuanto al despliegue de la plataforma.
+
+Todo esto trae consigo una gran ventaja, ya que permite que los equipos de desarrollo puedan enfocarse directamente en la lógica empresarial que requiere la aplicación, haciendo el proceso más corto, rápido y eficaz, ahorrando líneas de código evitando tareas repetitivas. 
 
 ## Documentaciones
 
-1. https://www.baeldung.com/spring-rest-openapi-documentation.
+1. https://www.baeldung.com/spring-rest-openapi-documentation
 2. https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
-3. https://spring.io/tools.
+3. https://www.baeldung.com/spring-boot-testing
+4. https://spring.io/tools
+
+## Glosario de terminos
 
 ## Crear un proyecto
 
@@ -15,6 +25,8 @@ Y seleccionar los campos deseados tal y como se muestra en las siguientes imagen
 
 ![Imagen 1](./screenshot/Screenshot_1.png)
 ![Imagen 2](./screenshot/Screenshot_6.png)
+
+## Capas de la arquitectura
 
 ## Configuracion del archivo pom.xml
 
@@ -37,120 +49,6 @@ Se deben agregar las siguientes lineas de codigo dentro de nuestro archivo pom.x
 
 Descargar el paquete Lombok en el siguiente enlace https://projectlombok.org/download
 
-## Agregando Enlaces
-
-- En la clase com.app.api
-
-```
-@SpringBootApplication
-@EnableSwagger2
-@EnableJpaAuditing
-```
-
-- En la clase com.app.api.application
-
-```
-
-```
-
-- En la clase com.app.api.controller
-
-```
-@RestController
-@RequestMapping("/subject")
-```
-
-- En la clase com.app.api.domain.model
-
-```
-@Getter
-@AllArgsConstructor
-```
-
-- En la clase com.app.api.domain.service
-
-```
-
-```
-
-- En la clase com.app.api.exceptions
-
-    1. ErrorCode.java
-
-        ```
-        @Data
-        @NoArgsConstructor
-        @AllArgsConstructor
-        ```
-
-    2. 
-
-        ```
-        @ExceptionHandler(Exception.class)
-        @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-        ```
-
-- En la clase com.app.api.infrastructure.dto
-
-1. Base Entity
-
-    ```
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @MappedSuperclass
-    @EntityListeners(AuditingEntityListener.class)
-    ```
-
-2. SubjectDto
-
-    ```
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Entity
-    @Table(name = "subjects")
-    ```
-
-- En la clase com.app.api.infrastructure.mapper
-
-```
-@Component
-```
-
-- En la clase com.app.api.infrastructure.repository.adapter
-
-```
-
-```
-
-- En la clase com.app.api.infrastructure.repository.database
-
-```
-@Repository
-```
-
-- En la clase com.app.api.infrastructure.rest
-
-```
-@Data
-```
-
-- En la clase com.app.api.shared.domain
-
-```
-@Getter
-try catch
-```
-
-- En la clase com.app.api.shared.infrastructure.mapper
-
-```
-<I O>
-<O I>
-```
-
 ## Conectarse a una base de datos en Postgres
 
 1. Inicializar Pg Admin 4 de nuestra computadora.
@@ -159,7 +57,7 @@ try catch
 
 ```
 spring.datasource.url=jdbc:postgresql://localhost:5432/Nombre_DB
-spring.datasource.password=pacho
+spring.datasource.password=root
 spring.datasource.username=postgres
 spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=update
@@ -171,6 +69,17 @@ spring.jpa.hibernate.ddl-auto=update
 2. Dirigirse a la ruta http://localhost:8080/swagger-ui.html.
 
 ## Estructura de los proyectos
+
+Se proponen seis capas conceptuales:
+
+- application
+- controller
+- domain
+- exceptions
+- infraestructure
+- shared
+
+Representadas de la siguiente forma dentro de los proyectos con sus respectivas subcarpetas.
 
 ```
 com.app.api
@@ -190,4 +99,55 @@ com.app.api.shared.infrastructure.mapper
 
 ![Imagen 3](./screenshot/Screenshot_2.png)
 
-## Glosario
+En el siguiente esquema se presenta una sugerencia secuencial al momento de construir y codificar la arquitectura de cada proyecto, con el fin de estandarizar un modelo de trabajo y de este modo, facilitar la importacion de metodos de una dependencia a otra.
+
+```
+└── src
+    └── main
+       └── com
+           └── api
+               └── Main.java 
+               |
+               infraestructure
+               └── dto
+                   └── BaseEntity.java
+                       [Name]Dto.java
+               └── rest
+                   └── [Name]Rest.java     
+               |   
+               exceptions
+               └── [Name]Exceptionjava
+                   ErrorCode.java
+                   HandlerException.java
+               |   
+               shared
+               └── domain 
+                   [Name].java
+               └── infraestructure   
+                   └── mapper  
+                       └── MapperDto.java
+                           MapperRest.java  
+               |       
+               domain
+               └── model 
+                   [Name].java
+               └── service 
+                   [Name]Service.java    
+               |   
+               infraestructure
+               └── mapper
+                   └── [Name]Mapper.java
+               └── repository
+                   └── database
+                       └── [Name]Repository.java 
+                   └── adapter
+                       └── [Name]Adapter.java 
+               |
+               application
+               └── [Name]Application.java  
+               |
+               controller
+               └── [Name]Controller.java                              
+```
+
+## Descripcion de la arquitectura y sus capas conceptuales
