@@ -113,21 +113,21 @@ En el siguiente esquema se presenta una sugerencia secuencial al momento de cons
                    └── BaseEntity.java
                        [Name]Dto.java
                └── rest
-                   └── [Name]Rest.java     
+               |   └── [Name]Rest.java     
                |   
                exceptions
                └── [Name]Exceptionjava
-                   ErrorCode.java
-                   HandlerException.java
+               |   ErrorCode.java
+               |   HandlerException.java
                |   
                shared
                └── domain 
                    [Name].java
                └── infraestructure   
-                   └── mapper  
-                       └── MapperDto.java
-                           MapperRest.java  
-               |       
+               |   └── mapper  
+               |       └── MapperDto.java
+               |           MapperRest.java  
+               |      
                domain
                └── model 
                    [Name].java
@@ -138,10 +138,10 @@ En el siguiente esquema se presenta una sugerencia secuencial al momento de cons
                └── mapper
                    └── [Name]Mapper.java
                └── repository
-                   └── database
-                       └── [Name]Repository.java 
-                   └── adapter
-                       └── [Name]Adapter.java 
+               |   └── database
+               |       └── [Name]Repository.java 
+               |   └── adapter
+               |       └── [Name]Adapter.java 
                |
                application
                └── [Name]Application.java  
