@@ -58,11 +58,11 @@ Las dependencias hacen parte esencial sde cada proyecto y pueden variar dependie
 
 ![Imagen 3](./screenshot/Screenshot_3.jpeg)
 
-- SQL Driver o NoSQL Driver: Puede seleccionarse entre los 2 motores de bases de datos relacionales MySQL y PosgresSQL o en su lugar MongoDB que permiten que los programas se conecten a una base de datos.  
-- Spring Data JPA: Persista los datos en los almacenes de SQL con Java Persistence API usando Spring Data e Hibernate.
-- Spring Boot DevTools: Proporciona reinicios rápidos de aplicaciones, LiveReload y configuraciones para una experiencia de desarrollo mejorada.
-- Spring Web: Cree aplicaciones web, incluidas RESTful, con Spring MVC. Utiliza Apache Tomcat como el contenedor integrado predeterminado.
-- Lombok: Biblioteca de anotaciones Java que ayuda a reducir el código repetitivo.
+- **SQL Driver o NoSQL Driver:** Puede seleccionarse entre los 2 motores de bases de datos relacionales MySQL y PosgresSQL o en su lugar MongoDB que permiten que los programas se conecten a una base de datos.  
+- **Spring Data JPA:** Persista los datos en los almacenes de SQL con Java Persistence API usando Spring Data e Hibernate.
+- **Spring Boot DevTools:** Proporciona reinicios rápidos de aplicaciones, LiveReload y configuraciones para una experiencia de desarrollo mejorada.
+- **Spring Web:** Cree aplicaciones web, incluidas RESTful, con Spring MVC. Utiliza Apache Tomcat como el contenedor integrado predeterminado.
+- **Lombok:** Biblioteca de anotaciones Java que ayuda a reducir el código repetitivo.
 
 **Paso 4:** Generar proyecto
 
