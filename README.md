@@ -17,6 +17,7 @@ Todo esto trae consigo una gran ventaja, ya que permite que los equipos de desar
 3. [Crear un proyecto](#crear-un-proyecto)
 4. [Estructura de los proyectos](#estructura-de-los-proyectos)
 5. [Esquema de construccion](#esquema-de-construccion)
+6. [Describiendo archivos](#describiendo-archivos)
 
 ## [Documentaciones Y Lecturas Sugeridas](#contenido)
 
@@ -27,7 +28,11 @@ Todo esto trae consigo una gran ventaja, ya que permite que los equipos de desar
 
 ## [Glosario de terminos](#contenido)
 
-- 
+- DTO:
+- MAPPER:
+- REST:
+- DOM:
+- POM:
 
 ## [Crear un proyecto](#contenido)
 
@@ -138,36 +143,29 @@ spring.jpa.hibernate.ddl-auto=update
 
 Se proponen seis capas conceptuales las cuales son:
 
-1. Application
-2. Controller
-3. Domain
-4. Exceptions
-5. Infraestructure
-6. Shared
-
-### Application
+### 1. Application
 
 Responsable de coordinar todos los elementos de la aplicación. No contiene lógica de negocio ni mantiene el estado de los objetos de negocio. Es responsable de mantener el estado de la aplicación y del flujo de esta.
 
-### Controller
+### 2. Controller
 
 Tiene clases con el objetivo principal de conectar el backend con las solicitudes que se hagan desde afuera de la aplicación(sistemas web, unirest, entre otros).
 
-### Domain
+### 3. Domain
 
 Contiene la información sobre el Dominio. Es el núcleo de la parte de la aplicación que contiene las reglas de negocio. Es responsable de mantener el estado de los objetos de negocio. (La persistencia de estos objetos se delega en la capa de infraestructura.
 
-### Exceptions
+### 4. Exceptions
 
 En esta capa se detallan los mensajes de errores personalizados para evitar multiples lineas de advertencias para cada uno de los errores que puedan presentarse al momento de realizar una peticion o consulta a nuestra aplicacion.
 
-### Infraestructure
+### 5. Infraestructure
 
 Esta capa es la capa de soporte para el resto de capas. Provee la comunicación entre las otras capas, implementa la persistencia de los objetos de negocio y las librerías de soporte para las otras capas (Interface, Comunicación, Almacenamiento, etc..)
 
 Dado que son capas conceptuales, su implementación puede ser muy variada y en una misma aplicación, tendremos partes o componentes que formen parte de cada una de estas capas. Por ejemplo, en una aplicación web desarrollada con Laravel, Las vistas formarían parte de la capa de Interface, pero Sass o Less, por ejemplo, serían parte de la infraestructura. Algunos componentes del Framework formarían parte de la infraestructura (Eloquent, Caches, etc...) y otros componentes formarían parte de la aplicación (Controladores, Comandos, Eventos, etc..). Los modelos, por ejemplo, formarían parte de la capa de Dominio.
 
-### Shared
+### 6. Shared
 
 En esta capa se brinda el soporte y control de las excepciones generadas durante la ejecucion de un evento, permitendo la captura de errores y lanzamiento de los mensajes personalizados dentro de la capa de Exceptions.
 
@@ -242,4 +240,108 @@ En el siguiente esquema se presenta una sugerencia secuencial al momento de cons
                |
                controller
                └── [Name]Controller.java                              
+```
+
+## [Describiendo archivos](#contenido)
+
+### Main.java
+
+En el archivo main.java del paquete api simplemente se inicializan Swagger 2 y Jpa Auditing en nuestro proyecto, tal como se muestra a continuacion en el codigo de ejemplo.
+
+```
+package com.app.api;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+@SpringBootApplication
+@EnableSwagger2
+@EnableJpaAuditing
+public class SubjectTestApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SubjectTestApplication.class, args);
+	}
+
+}
+```
+
+### BaseEntity.java
+
+Este archivo se encuentra en el paquete infraestructure dentro de la carpeta dto y contiene las entidades bases que seran heredadas por las demas entidades que creemos dentro de nuestro proyecto.
+
+```
+package com.app.api.infrastructure.dto;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.EntityListeners;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+public class BaseEntity {
+	
+	@Id
+	private String id;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "fecha_creacion", nullable = false, updatable = false)
+	@CreatedDate
+	Date fechaCreacion;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "fecha_modificacion")
+	@LastModifiedDate
+	Date fechaActualizada;
+
+}
+```
+
+### [ ]Dto.java
+
+Contiene las entidades que seran utilizadas dentro de los campos de la tabla que sera creada dentro de nuestra base de datos.
+
+```
+package com.app.api.infrastructure.dto;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "subjects")
+public class SubjectDto extends BaseEntity {
+
+	private String code;
+	private String name;
+	private Integer credit;
+	
+}
 ```
