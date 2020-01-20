@@ -8,7 +8,14 @@ Spring, ofrece como elemento clave el soporte de infraestructura a nivel de apli
 
 Todo esto trae consigo una gran ventaja, ya que permite que los equipos de desarrollo puedan enfocarse directamente en la lógica empresarial que requiere la aplicación, haciendo el proceso más corto, rápido y eficaz, ahorrando líneas de código evitando tareas repetitivas. 
 
-## Documentaciones
+# Contenido
+
+1. 
+2. 
+3. 
+4. 
+
+## Documentaciones Y Lecturas Sugeridas
 
 1. https://www.baeldung.com/spring-rest-openapi-documentation
 2. https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
@@ -17,20 +24,67 @@ Todo esto trae consigo una gran ventaja, ya que permite que los equipos de desar
 
 ## Glosario de terminos
 
+- 
+
 ## Crear un proyecto
 
-Para Crear un proyecto basta con ingresar al siguiente enlace https://start.spring.io/.
+### Primeros pasos
 
-Y seleccionar los campos deseados tal y como se muestra en las siguientes imagenes:
+Con Spring Initializr se pueden generar y configurar proyectos de forma segura y rapida aprovechando las distintas configuraciones y opciones que nos ofrece la plataforma.
+
+Para Crear un proyecto basta con ingresar al siguiente enlace https://start.spring.io/ para asi seleccionar los campos deseados tal y como se explicara a continuacion:
+
+**Paso 1:** Opciones para la creacion del proyecto
+
+Dependiendo de las necesidades de nuestro proyecto podemos seleccionar entre **Maven** o **Gradel** que son herramientas de software libre para gestionar proyectos Java.
+
+Del mismo modo se nos brindan 3 opciones para el lenguaje de programacion que estara presente en todo nuestro los cuales son: Java, Kotlin y Groovy.
+
+Finalmente, se debe seleccionar la version de Spring Boot a utilizar, para est se recomienda utilizar la version estable, la cual se ve seleccionada por defecto. 
 
 ![Imagen 1](./screenshot/Screenshot_1.png)
-![Imagen 2](./screenshot/Screenshot_6.png)
 
-## Capas de la arquitectura
+**Paso 2:** Metadatos del proyecto
 
-## Configuracion del archivo pom.xml
+En este paso se debe escribir el grupo donde iran los archivos, el artifact que corresponde al nombre del proyecto.
 
-Se deben agregar las siguientes lineas de codigo dentro de nuestro archivo pom.xml
+A continuacion, dentro de opciones escribir la informacion referente al nombre y descripcion del proyecto, junto con el nombre del paquete que sera generado. Para finalmente seleccionar el tipo de empaquetado donde se comprimira el proyecto y version del lenguaje seleccionado previamente. 
+
+![Imagen 2](./screenshot/Screenshot_2.png)
+
+**Paso 3:** Dependencias
+
+Las dependencias hacen parte esencial sde cada proyecto y pueden variar dependiendo de las necesidades de cada uno, pero las dependencias estandar que no pueden faltar son las que se muestran en la siguiente imagen.
+
+![Imagen 3](./screenshot/Screenshot_3.jpeg)
+
+- SQL Driver o NoSQL Driver: Puede seleccionarse entre los 2 motores de bases de datos relacionales MySQL y PosgresSQL o en su lugar MongoDB que permiten que los programas se conecten a una base de datos.  
+- Spring Data JPA: Persista los datos en los almacenes de SQL con Java Persistence API usando Spring Data e Hibernate.
+- Spring Boot DevTools: Proporciona reinicios rápidos de aplicaciones, LiveReload y configuraciones para una experiencia de desarrollo mejorada.
+- Spring Web: Cree aplicaciones web, incluidas RESTful, con Spring MVC. Utiliza Apache Tomcat como el contenedor integrado predeterminado.
+- Lombok: Biblioteca de anotaciones Java que ayuda a reducir el código repetitivo.
+
+**Paso 4:** Generar proyecto
+
+A continuacion, se debe hacer click en el boton **Generate** para obtener el archivo comprimido con nuestro proyecto ya preparado para ser montado en el IDE de nuestra preferencia, aunque se recomienda usar eclipse para estos casos.
+
+**(Opcional) Paso 5:** Adicionar Estructura trabajada en ZABUD
+
+Para mayor comodidad al momento de trabajar nuevos proyectos pude descargar el siguiente archivo: [Estructura](./Estructure.zip).
+
+Al finalizar la descarga, extraiga el archivo y copie el contenido dentro de la carpeta que coniene el archivo principal de su proyecto.
+
+**Paso 6:** Importar proyecto al IDE
+
+Si se usa eclipse basta con importar el proyecto si es maven o importar archivo de forma general.
+
+Para activar Spring Boot en eclipse IDE se necesita descargar la extension Spring Boot Tools 4 del market place el cual se puede acceder desde el menu help.
+
+![Imagen 6](./screenshot/Screenshot_6.png)
+
+**Paso 7:** Activar Swagger 2
+
+Se deben agregar las siguientes lineas de codigo dentro de nuestro archivo `pom.xml` que se encuentra en la raiz del proyecto dentro de las etiquetas `<dependencies></dependencies>`.
 
 ```
 <dependency>
@@ -45,15 +99,24 @@ Se deben agregar las siguientes lineas de codigo dentro de nuestro archivo pom.x
     <version>2.9.2</version>
 </dependency>
 ```
-## Lombok
 
-Descargar el paquete Lombok en el siguiente enlace https://projectlombok.org/download
+**Paso 8:** Lombok
 
-## Conectarse a una base de datos en Postgres
+Descargar el paquete Lombok en el siguiente enlace https://projectlombok.org/download.
+
+Abrir el archivo ejecutable y seleccionar el IDE utilizado, finalmente hacer clic en el boton **Install / Update**.
+
+![Imagen 4](./screenshot/Screenshot_4.png)
+
+Para finalizar simplemente hacer clic en cerrar o salir de la aplicacion.
+
+![Imagen 5](./screenshot/Screenshot_5.png)
+
+**Paso 9:** Conectarse a una base de datos en Postgres
 
 1. Inicializar Pg Admin 4 de nuestra computadora.
 2. Tener una base de datos creada.
-3. Agregar la siguiente instruccion al archivo application.properties.
+3. Agregar la siguiente instruccion al archivo `application.properties`.
 
 ```
 spring.datasource.url=jdbc:postgresql://localhost:5432/Nombre_DB
@@ -63,14 +126,14 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialec
 spring.jpa.hibernate.ddl-auto=update
 ```
 
-## Ingresar a swagger
+**Paso 10:** Ingresar a Swagger
 
 1. Clic derecho sobre el proyecto > run as > clic en spring boot app.
 2. Dirigirse a la ruta http://localhost:8080/swagger-ui.html.
 
 ## Estructura de los proyectos
 
-Se proponen seis capas conceptuales:
+Se proponen seis capas conceptuales las cuales son:
 
 - application
 - controller
@@ -96,6 +159,37 @@ com.app.api.infrastructure.rest
 com.app.api.shared.domain
 com.app.api.shared.infrastructure.mapper
 ```
+
+## Descripcion de la arquitectura y sus capas conceptuales
+
+A continuacion, se presenta la informacion correspondiente a la razon de ser de cada una de estas capas.
+
+
+### application
+
+
+
+### controller
+
+
+
+### domain
+
+
+
+### exceptions
+
+
+
+### infraestructure
+
+
+
+### shared
+
+
+
+## Esquema de construccion
 
 ![Imagen 3](./screenshot/Screenshot_2.png)
 
@@ -149,5 +243,3 @@ En el siguiente esquema se presenta una sugerencia secuencial al momento de cons
                controller
                └── [Name]Controller.java                              
 ```
-
-## Descripcion de la arquitectura y sus capas conceptuales
