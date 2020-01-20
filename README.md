@@ -2,6 +2,8 @@
 
 La arquitectura Diseño guiado por el dominio **(Domain Driven Design)** es un conjunto de patrones principos y práticas que nos ayudan a resolver y entender los problemas del negocio **(Dominio)** en el diseño de sistemas orientados a objetos.  
 
+![Imagen 7](./screenshot/Screenshot_7.png)
+
 # Spring Framework
 
 Spring, ofrece como elemento clave el soporte de infraestructura a nivel de aplicación, brindando un completo modelo tanto para la configuración como para la programación de aplicaciones empresariales desarrolladas bajo Java, sin discriminación en cuanto al despliegue de la plataforma.
@@ -143,38 +145,37 @@ Se proponen seis capas conceptuales las cuales son:
 5. Infraestructure
 6. Shared
 
-### Descripcion de la arquitectura y sus capas conceptuales
+### Application
 
-A continuacion, se presenta la informacion correspondiente a la razon de ser de cada una de estas capas.
+Responsable de coordinar todos los elementos de la aplicación. No contiene lógica de negocio ni mantiene el estado de los objetos de negocio. Es responsable de mantener el estado de la aplicación y del flujo de esta.
 
+### Controller
 
-### application
+Tiene clases con el objetivo principal de conectar el backend con las solicitudes que se hagan desde afuera de la aplicación(sistemas web, unirest, entre otros).
 
+### Domain
 
+Contiene la información sobre el Dominio. Es el núcleo de la parte de la aplicación que contiene las reglas de negocio. Es responsable de mantener el estado de los objetos de negocio. (La persistencia de estos objetos se delega en la capa de infraestructura.
 
-### controller
+### Exceptions
 
+En esta capa se detallan los mensajes de errores personalizados para evitar multiples lineas de advertencias para cada uno de los errores que puedan presentarse al momento de realizar una peticion o consulta a nuestra aplicacion.
 
+### Infraestructure
 
-### domain
+Esta capa es la capa de soporte para el resto de capas. Provee la comunicación entre las otras capas, implementa la persistencia de los objetos de negocio y las librerías de soporte para las otras capas (Interface, Comunicación, Almacenamiento, etc..)
 
+Dado que son capas conceptuales, su implementación puede ser muy variada y en una misma aplicación, tendremos partes o componentes que formen parte de cada una de estas capas. Por ejemplo, en una aplicación web desarrollada con Laravel, Las vistas formarían parte de la capa de Interface, pero Sass o Less, por ejemplo, serían parte de la infraestructura. Algunos componentes del Framework formarían parte de la infraestructura (Eloquent, Caches, etc...) y otros componentes formarían parte de la aplicación (Controladores, Comandos, Eventos, etc..). Los modelos, por ejemplo, formarían parte de la capa de Dominio.
 
+### Shared
 
-### exceptions
+En esta capa se brinda el soporte y control de las excepciones generadas durante la ejecucion de un evento, permitendo la captura de errores y lanzamiento de los mensajes personalizados dentro de la capa de Exceptions.
 
-
-
-### infraestructure
-
-
-
-### shared
-
-
+Tambien se encarga de realizar el proceso de transformacion de la infraestructura, donde las entidades del dominio se convierten de REST, DTO o viceversa.
 
 ## [Esquema de construccion](#contenido)
 
-Representadas de la siguiente forma dentro de los proyectos con sus respectivas subcarpetas.
+Las capas anteriormente descritas son representadas de la siguiente forma, dentro de los proyectos con sus respectivas subcarpetas.
 
 ```
 com.app.api
