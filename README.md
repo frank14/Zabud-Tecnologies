@@ -33,6 +33,7 @@ Todo esto trae consigo una gran ventaja, ya que permite que los equipos de desar
 - REST:
 - DOM:
 - POM:
+- Value Object:
 
 ## [Crear un proyecto](#contenido)
 
@@ -208,7 +209,7 @@ En el siguiente esquema se presenta una sugerencia secuencial al momento de cons
                |   └── [Name]Rest.java     
                |   
                exceptions
-               └── [Name]Exceptionjava
+               └── [Name]Exception.java
                |   ErrorCode.java
                |   HandlerException.java
                |   
@@ -316,7 +317,7 @@ public class BaseEntity {
 }
 ```
 
-### [ ]Dto.java
+### [Name]Dto.java
 
 Contiene las entidades que seran utilizadas dentro de los campos de la tabla que sera creada dentro de nuestra base de datos.
 
@@ -342,6 +343,159 @@ public class SubjectDto extends BaseEntity {
 	private String code;
 	private String name;
 	private Integer credit;
+	
+}
+```
+
+### [Name]Rest.java
+
+En este archivo se declaran las variables y los tipos de datos que seran utilizados dentro del programa.
+
+```
+package com.app.api.infrastructure.rest;
+
+import lombok.Data;
+
+@Data
+public class SubjectRest {
+	
+	private String id;
+	private String code;
+	private String name;
+	private Integer credit;
+	
+}
+```
+
+### [Name]Exception.java
+
+Aqui se heredan los diferentes tipos de errores existentes para luego imprimir un mensaje agradable para el usuario el cual sera mucho mas legible y simple de entender.
+
+```
+package com.app.api.exceptions;
+
+public class CodeException extends RuntimeException {
+
+	public CodeException() {
+		super("ERROR: Code Exception");
+	}
+	
+}
+```
+
+### ErrorCode.java
+
+Aqui se configuran los codigos y mensajes que seran enviados.
+
+```
+package com.app.api.exceptions;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class ErrorCode {
+	
+	private String code;
+	private String message;
+	
+}
+```
+
+### HandlerException.java
+
+Aqui se capturan las excepciones y se disparan los metodos encontrados en errorCode.
+
+```
+package com.app.api.exceptions;
+
+import java.util.UUID;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import lombok.extern.java.Log;
+
+@RestControllerAdvice
+@Log
+public class HandlerException {
+	
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public ErrorCode generalException(Exception e) {
+
+		ErrorCode ec = new ErrorCode();
+		ec.setCode(generateId());
+		ec.setMessage(e.getMessage());
+		generateLog(e, ec);
+		return ec;
+		
+	}
+
+	@ExceptionHandler(CodeException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ErrorCode codeException(CodeException e) {
+
+		ErrorCode ec = new ErrorCode();
+		ec.setCode(generateId());
+		ec.setMessage(e.getMessage());
+		generateLog(e, ec);
+		return ec;
+		
+	}
+
+	@ExceptionHandler(NameException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ErrorCode nameException(NameException e) {
+		
+		ErrorCode ec = new ErrorCode();
+		ec.setCode(generateId());
+		ec.setMessage(e.getMessage());
+		generateLog(e, ec);
+		return ec;
+		
+	}
+
+	@ExceptionHandler(IdException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ErrorCode idException(IdException e) {
+		
+		ErrorCode ec = new ErrorCode();
+		ec.setCode(generateId());
+		ec.setMessage(e.getMessage());
+		generateLog(e, ec);
+		return ec;
+		
+	}
+
+	@ExceptionHandler(CreditException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ErrorCode creditException(CreditException e) {
+		
+		ErrorCode ec = new ErrorCode();
+		ec.setCode(generateId());
+		ec.setMessage(e.getMessage());
+		generateLog(e, ec);
+		return ec;
+		
+	}
+
+	public String generateId() {
+		return UUID.randomUUID().toString();
+	}
+
+	public void generateLog(Exception e, ErrorCode ec) {
+
+		log.severe(e.getMessage());
+		log.severe(ec.getMessage());
+		log.severe(ec.getCode());
+		
+	}
 	
 }
 ```
