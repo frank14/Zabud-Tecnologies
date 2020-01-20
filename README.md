@@ -10,23 +10,24 @@ Todo esto trae consigo una gran ventaja, ya que permite que los equipos de desar
 
 # Contenido
 
-1. 
-2. 
-3. 
-4. 
+1. [Documentaciones Y Lecturas Sugeridas](#documentaciones-y-lecturas-sugeridas)
+2. [Glosario de terminos](#glosario-de-terminos)
+3. [Crear un proyecto](#crear-un-proyecto)
+4. [Estructura de los proyectos](#estructura-de-los-proyectos)
+5. [Esquema de construccion](#esquema-de-construccion)
 
-## Documentaciones Y Lecturas Sugeridas
+## [Documentaciones Y Lecturas Sugeridas](#contenido)
 
 1. https://www.baeldung.com/spring-rest-openapi-documentation
 2. https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
 3. https://www.baeldung.com/spring-boot-testing
 4. https://spring.io/tools
 
-## Glosario de terminos
+## [Glosario de terminos](#contenido)
 
 - 
 
-## Crear un proyecto
+## [Crear un proyecto](#contenido)
 
 ### Primeros pasos
 
@@ -131,36 +132,18 @@ spring.jpa.hibernate.ddl-auto=update
 1. Clic derecho sobre el proyecto > run as > clic en spring boot app.
 2. Dirigirse a la ruta http://localhost:8080/swagger-ui.html.
 
-## Estructura de los proyectos
+## [Estructura de los proyectos](#contenido)
 
 Se proponen seis capas conceptuales las cuales son:
 
-- application
-- controller
-- domain
-- exceptions
-- infraestructure
-- shared
+1. Application
+2. Controller
+3. Domain
+4. Exceptions
+5. Infraestructure
+6. Shared
 
-Representadas de la siguiente forma dentro de los proyectos con sus respectivas subcarpetas.
-
-```
-com.app.api
-com.app.api.application
-com.app.api.controller
-com.app.api.domain.model
-com.app.api.domain.service
-com.app.api.exceptions
-com.app.api.infrastructure.dto
-com.app.api.infrastructure.mapper
-com.app.api.infrastructure.repository.adapter
-com.app.api.infrastructure.repository.database
-com.app.api.infrastructure.rest
-com.app.api.shared.domain
-com.app.api.shared.infrastructure.mapper
-```
-
-## Descripcion de la arquitectura y sus capas conceptuales
+### Descripcion de la arquitectura y sus capas conceptuales
 
 A continuacion, se presenta la informacion correspondiente a la razon de ser de cada una de estas capas.
 
@@ -189,9 +172,25 @@ A continuacion, se presenta la informacion correspondiente a la razon de ser de 
 
 
 
-## Esquema de construccion
+## [Esquema de construccion](#contenido)
 
-![Imagen 3](./screenshot/Screenshot_2.png)
+Representadas de la siguiente forma dentro de los proyectos con sus respectivas subcarpetas.
+
+```
+com.app.api
+com.app.api.application
+com.app.api.controller
+com.app.api.domain.model
+com.app.api.domain.service
+com.app.api.exceptions
+com.app.api.infrastructure.dto
+com.app.api.infrastructure.mapper
+com.app.api.infrastructure.repository.adapter
+com.app.api.infrastructure.repository.database
+com.app.api.infrastructure.rest
+com.app.api.shared.domain
+com.app.api.shared.infrastructure.mapper
+```
 
 En el siguiente esquema se presenta una sugerencia secuencial al momento de construir y codificar la arquitectura de cada proyecto, con el fin de estandarizar un modelo de trabajo y de este modo, facilitar la importacion de metodos de una dependencia a otra.
 
