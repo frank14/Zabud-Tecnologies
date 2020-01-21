@@ -1,10 +1,10 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/producttest
-    password: pacho
+    password: root
     username: postgres
+
   jpa:
     properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        ddl-auto: update
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate.ddl-auto: update
