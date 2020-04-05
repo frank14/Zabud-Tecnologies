@@ -1,0 +1,16 @@
+server:
+  port: 8020
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  data:
+    mongodb:
+      uri: mongodb://10.180.81.44:27017/Mipres
+  activemq:
+     broker-url: tcp://10.180.81.44:61616
+     user: admin
+     password: admin
+     
+message: 
+  outbound:
+    franciscoInBound: franciscoInBound
